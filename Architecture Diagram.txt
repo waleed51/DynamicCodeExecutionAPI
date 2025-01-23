@@ -1,0 +1,16 @@
+Below is a description of the architecture:
+
+Frontend (Angular 17):
+ - Communicates with the backend over REST APIs.
+ - Displays the list of functions, provides a code editor for writing functions.
+Backend (ASP.NET 8):
+ - API Layer: Exposes RESTful APIs for CRUD operations on functions and executing code dynamically.
+Business Layer: 
+ - Handles dynamic code compilation using Roslyn Compiler.
+Data Access Layer:
+- Interacts with the database to save and retrieve function metadata and source files.
+Database:
+ - Source files and their content.
+
+Docker:
+ - Hosts the Angular frontend, .NET backend, and the database in separate containers.
