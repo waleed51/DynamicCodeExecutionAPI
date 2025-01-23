@@ -1,0 +1,6 @@
+Dynamic Code execution API: 
+
+this enhancements can be used but ignored to match time frame for task: 
+1. we can use any code architecture and patterns (like DDD, clean architecture, CQRS, ...).
+2. we can use Separation of Concepts prinsible and clean archticutre with layers (Application, Domain, Infrastructure).
+3. we can use connection string in appsettings file to make it configurable.
