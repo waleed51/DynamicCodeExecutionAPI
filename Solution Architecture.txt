@@ -1,0 +1,15 @@
+High-Level Overview
+The solution is based on a microservice architecture with the following components:
+
+Frontend (Angular 17):
+A dynamic and responsive user interface for writing, selecting, and executing C# functions.
+Generates UI elements (input fields) based on the parameters of the selected function.
+Backend (ASP.NET 8):
+Responsible for securely persisting, compiling, and executing C# code.
+Provides APIs for managing source files, functions, and their parameters.
+Executes functions dynamically using Roslyn Compiler.
+Database:
+Stores the source files, function metadata, and execution logs.
+Docker:
+Hosts the application securely in isolated containers for both the frontend and backend.
+Ensures a consistent and portable development/production environment.
