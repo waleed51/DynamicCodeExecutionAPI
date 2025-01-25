@@ -1,8 +1,6 @@
 using DynamicCodeExecutionAPI.Contexts;
 using DynamicCodeExecutionAPI.interfaces;
-using DynamicCodeExecutionAPI.Services;
 using Microsoft.EntityFrameworkCore;
-using System.Runtime.Intrinsics.X86;
 
 var builder = WebApplication.CreateBuilder(args);
 

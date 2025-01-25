@@ -71,7 +71,7 @@ namespace DynamicCodeExecutionAPI.Controllers
 
         // POST: api/CodeEditor/execute
         [HttpPost("execute")]
-        public async Task<IActionResult> ExecuteSnippet([FromBody] JObject payload)
+        public async Task<IActionResult> ExecuteSnippet([FromBody] SnippetExecutionPayload payload)
         {
             if (payload == null)
             {
@@ -80,22 +80,17 @@ namespace DynamicCodeExecutionAPI.Controllers
 
             try
             {
-                // Extract payload parameters
-                int snippetId = payload["id"]?.Value<int>() ?? 0;
-                string methodName = payload["name"]?.Value<string>();
-                object[] parameters = payload["parameters"]?.ToObject<object[]>() ?? Array.Empty<object>();
-
                 // Validate input
-                if (snippetId == 0 || string.IsNullOrEmpty(methodName))
+                if (payload.Id <= 0 || string.IsNullOrEmpty(payload.Name))
                 {
                     return BadRequest(new { message = "Snippet ID and method name are required." });
                 }
 
                 // Retrieve snippet from the database
-                var snippet = await _context.SourceCodes.FindAsync(snippetId);
+                var snippet = await _context.SourceCodes.FindAsync(payload.Id);
                 if (snippet == null)
                 {
-                    return NotFound(new { message = $"Snippet with ID {snippetId} not found." });
+                    return NotFound(new { message = $"Snippet with ID {payload.Id} not found." });
                 }
 
                 // Validate snippet code
@@ -105,14 +100,14 @@ namespace DynamicCodeExecutionAPI.Controllers
                 }
 
                 // Execute the code
-                var result = _executionService.ExecuteCode(snippet.Code, methodName, parameters);
+                var result = _executionService.ExecuteCode(snippet.Code, payload.Name, payload.Parameters);
 
                 return Ok(new
                 {
-                    snippetId = snippetId,
+                    snippetId = payload.Id,
                     segmentName = snippet.SegmentName,
-                    methodName = methodName,
-                    parameters = parameters,
+                    methodName = payload.Name,
+                    parameters = payload.Parameters,
                     result = result
                 });
             }
@@ -121,5 +116,6 @@ namespace DynamicCodeExecutionAPI.Controllers
                 return StatusCode(500, new { message = "An error occurred while executing the snippet.", error = ex.Message });
             }
         }
+
     }
 }
