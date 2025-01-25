@@ -56,3 +56,4 @@ dkms.conf
 *.props
 /DynamicCodeExecutionAPI/obj
 /.vs
+/DynamicCodeExecutionAPI/bin/Debug/net8.0
