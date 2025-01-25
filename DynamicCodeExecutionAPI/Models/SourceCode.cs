@@ -4,9 +4,9 @@ namespace DynamicCodeExecutionAPI.Models
 {
     public class SourceCode
     {
-        [Key] // we can add configuration class for models and update it 
-        public int? Id { get; set; }
-        public string? SegmentName { get; set; }
-        public string? Code { get; set; }
+        [Key]
+        public int? Id { get; set; } // Nullable Id for flexibility
+        public string? SegmentName { get; set; } // Nullable SegmentName
+        public string? Code { get; set; } // Nullable Code
     }
 }
